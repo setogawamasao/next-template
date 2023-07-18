@@ -1,5 +1,11 @@
 "use client";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlus,
+  faMagnifyingGlass,
+  faTrashCan,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   const row = {
@@ -22,7 +28,7 @@ export default function Home() {
         <PanelHeader>
           検索条件
           <PanelHeaderButton>
-            {/* <font-awesome-icon :icon="['fas', 'magnifying-glass']" className="mr-1" /> */}
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="mr-1" />
             検索
           </PanelHeaderButton>
         </PanelHeader>
@@ -117,7 +123,7 @@ export default function Home() {
         <PanelHeader>
           検索結果
           <PanelHeaderButton>
-            {/* <font-awesome-icon :icon="['fas', 'plus']" className="mr-1" />  */}
+            <FontAwesomeIcon icon={faPlus} className="mr-1" />
             追加
           </PanelHeaderButton>
         </PanelHeader>
@@ -152,7 +158,7 @@ export default function Home() {
                     <td>createdAt</td>
                     <td>
                       <button className="button is-small head-button">
-                        {/* <font-awesome-icon :icon="['fas', 'trash-can']" /> */}
+                        <FontAwesomeIcon icon={faTrashCan} />
                       </button>
                     </td>
                   </tr>
