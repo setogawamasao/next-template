@@ -8,17 +8,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
-  const row = {
-    no: 1,
-    title: "bbb",
-    description: "ccc",
-    dueDate: "ddd",
-    createdAt: "eee",
-  };
-
   const rows = [];
 
   for (let i = 1; i <= 50; i++) {
+    const row = {
+      no: i,
+      title: "bbb",
+      description:
+        "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      dueDate: "ddd",
+      createdAt: "eee",
+    };
     rows.push(row);
   }
 
@@ -132,31 +132,31 @@ export default function Home() {
             <table className="table is-striped is-fullwidth">
               <thead>
                 <tr>
-                  <TableHeader>No</TableHeader>
-                  <TableHeader>完了</TableHeader>
-                  <TableHeader>タイトル</TableHeader>
-                  <TableHeader>内容</TableHeader>
-                  <TableHeader>期限</TableHeader>
-                  <TableHeader>登録日</TableHeader>
-                  <TableHeader>削除</TableHeader>
+                  <TableHeader style={{ width: "10px" }}>No</TableHeader>
+                  <TableHeader style={{ width: "75px" }}>完了</TableHeader>
+                  <TableHeader style={{ width: "20%" }}>タイトル</TableHeader>
+                  <TableHeader style={{ width: "auto" }}>内容</TableHeader>
+                  <TableHeader style={{ width: "110px" }}>期限</TableHeader>
+                  <TableHeader style={{ width: "110px" }}>登録日</TableHeader>
+                  <TableHeader style={{ width: "60px" }}>削除</TableHeader>
                 </tr>
               </thead>
               <tbody>
                 {rows.map((row) => (
                   <tr>
-                    <td>
-                      <a>#1</a>
+                    <td style={{ width: "10px" }}>
+                      <a>#{row.no}</a>
                     </td>
-                    <td align="center">
+                    <td align="center" style={{ width: "75px" }}>
                       <label className="checkbox">
-                        <input type="checkbox" v-model="row.isDone" />
+                        <input type="checkbox" />
                       </label>
                     </td>
-                    <td>title</td>
-                    <td>description</td>
-                    <td>dueDate</td>
-                    <td>createdAt</td>
-                    <td>
+                    <td style={{ width: "20%" }}>{row.title}</td>
+                    <td style={{ width: "auto" }}>{row.description}</td>
+                    <td style={{ width: "110px" }}>{row.dueDate}</td>
+                    <td style={{ width: "110px" }}>{row.createdAt}</td>
+                    <td style={{ width: "60px" }}>
                       <button className="button is-small head-button">
                         <FontAwesomeIcon icon={faTrashCan} />
                       </button>
