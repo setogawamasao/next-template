@@ -1,8 +1,5 @@
-// import "./globals.css";
-import { Inter } from "next/font/google";
+import { StyledComponentsRegistry } from "@/app/styling/StyledComponentsRegistry";
 import "bulma/css/bulma.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -16,7 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+      </body>
     </html>
   );
 }
