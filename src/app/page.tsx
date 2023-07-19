@@ -7,17 +7,17 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Home() {
+export default function Search() {
   const rows = [];
 
   for (let i = 1; i <= 50; i++) {
     const row = {
       no: i,
-      title: "bbb",
+      title: "xxxxxxxxxxxxxxxx",
       description:
-        "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-      dueDate: "ddd",
-      createdAt: "eee",
+        "ああああああああああああああああああああああああああああああああああああああああああああああああああああああああ",
+      dueDate: "2023/12/31",
+      createdAt: "2023/12/31",
     };
     rows.push(row);
   }
@@ -133,7 +133,7 @@ export default function Home() {
               <thead>
                 <tr>
                   <TableHeader style={{ width: "10px" }}>No</TableHeader>
-                  <TableHeader style={{ width: "75px" }}>完了</TableHeader>
+                  <TableHeader style={{ minWidth: "75px" }}>完了</TableHeader>
                   <TableHeader style={{ width: "20%" }}>タイトル</TableHeader>
                   <TableHeader style={{ width: "auto" }}>内容</TableHeader>
                   <TableHeader style={{ width: "110px" }}>期限</TableHeader>
@@ -147,13 +147,29 @@ export default function Home() {
                     <td style={{ width: "10px" }}>
                       <a>#{row.no}</a>
                     </td>
-                    <td align="center" style={{ width: "75px" }}>
+                    <td align="center" style={{ width: "110px" }}>
                       <label className="checkbox">
                         <input type="checkbox" />
                       </label>
                     </td>
                     <td style={{ width: "20%" }}>{row.title}</td>
-                    <td style={{ width: "auto" }}>{row.description}</td>
+                    <td
+                      style={{
+                        width: "auto",
+                        maxWidth: "400px",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <p
+                        style={{
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {row.description}
+                      </p>
+                    </td>
                     <td style={{ width: "110px" }}>{row.dueDate}</td>
                     <td style={{ width: "110px" }}>{row.createdAt}</td>
                     <td style={{ width: "60px" }}>
@@ -175,7 +191,7 @@ export default function Home() {
 const TableContainer = styled.div.attrs({
   className: "control",
 })`
-  overflow: auto;
+  overflow-y: scroll;
   height: 350px;
 `;
 
