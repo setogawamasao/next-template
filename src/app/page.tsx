@@ -1,6 +1,9 @@
 "use client";
+import { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DatePicker, { registerLocale } from "react-datepicker";
+import ja from "date-fns/locale/ja";
 import {
   faPlus,
   faMagnifyingGlass,
@@ -8,7 +11,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Search() {
+  const [selectedDate, setSelectedDate] = useState<Date>();
   const rows = [];
+  registerLocale("ja", ja);
 
   for (let i = 1; i <= 50; i++) {
     const row = {
@@ -43,7 +48,6 @@ export default function Search() {
                   className="input is-small"
                   type="text"
                   placeholder="Text input"
-                  v-model="title"
                 />
               </Column>
               <Column>
@@ -54,7 +58,6 @@ export default function Search() {
                   className="input is-small"
                   type="text"
                   placeholder="Text input"
-                  v-model="description"
                 />
               </Column>
               <Column>
@@ -62,7 +65,7 @@ export default function Search() {
               </Column>
               <Column>
                 <div className="select is-small" style={{ width: "100%" }}>
-                  <select style={{ width: "100%" }} v-model="isDone">
+                  <select style={{ width: "100%" }}>
                     <option value="">すべて</option>
                     <option value="false">未完了</option>
                     <option value="true">完了</option>
@@ -75,23 +78,21 @@ export default function Search() {
                 <Caption>期限</Caption>
               </Column>
               <TwoColumn>
-                {/* <Datepicker
-                v-model="dueDateFrom"
-                :language="ja"
-                :format="$formatDate.fromJs"
-                placeholder="from"
-                style="width: 100%"
-                input-className="input form is-small"
-              /> */}
+                <DatePicker
+                  dateFormat="yyyy/MM/dd"
+                  locale="ja"
+                  selected={selectedDate}
+                  onChange={(date: Date) => setSelectedDate(date!)}
+                  className="input form is-small"
+                />
                 <span className="mx-2">-</span>
-                {/* <Datepicker
-                v-model="dueDateTo"
-                :language="ja"
-                :format="$formatDate.fromJs"
-                placeholder="to"
-                style="width: 100%"
-                input-className="input form is-small"
-              /> */}
+                <DatePicker
+                  dateFormat="yyyy/MM/dd"
+                  locale="ja"
+                  selected={selectedDate}
+                  onChange={(date: Date) => setSelectedDate(date!)}
+                  className="input form is-small"
+                />
               </TwoColumn>
               <Column>
                 <Caption>登録日</Caption>
@@ -142,8 +143,8 @@ export default function Search() {
                 </tr>
               </thead>
               <tbody>
-                {rows.map((row) => (
-                  <tr>
+                {rows.map((row, index) => (
+                  <tr key={index}>
                     <td style={{ width: "10px" }}>
                       <a>#{row.no}</a>
                     </td>

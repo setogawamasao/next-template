@@ -1,5 +1,8 @@
 import { StyledComponentsRegistry } from "@/app/styling/StyledComponentsRegistry";
+// CSSは後に書いたほうが強い
 import "bulma/css/bulma.css";
+import "react-datepicker/dist/react-datepicker.css";
+import "./globals.css";
 
 export const metadata = {
   title: "Create Next App",
