@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import styled from "styled-components";
+import { DateTime } from "luxon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DatePicker, { registerLocale } from "react-datepicker";
 import ja from "date-fns/locale/ja";
@@ -9,30 +10,46 @@ import {
   faMagnifyingGlass,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
+import { TodoItem, fetchTodo } from "@/services/todoService";
 
 export default function Search() {
+  // const rows: TodoItem[] = [];
+  // for (let i = 1; i <= 50; i++) {
+  //   const row: TodoItem = {
+  //     id: i,
+  //     title: "xxxxxxxxxxxxxxxx",
+  //     description: "あああああああああああああああああああああああああああ",
+  //     dueDate: new Date(),
+  //     isDone: false,
+  //     createdAt: new Date(),
+  //     updatedAt: new Date(),
+  //   };
+  //   rows.push(row);
+  // }
+
   const [selectedDate, setSelectedDate] = useState<Date>();
-  const rows = [];
+  const [todoList, setTodoList] = useState<TodoItem[] | undefined>(undefined);
+  // const [todoList, setTodoList] = useState<TodoItem[] | undefined>(rows);
+
   registerLocale("ja", ja);
 
-  for (let i = 1; i <= 50; i++) {
-    const row = {
-      no: i,
-      title: "xxxxxxxxxxxxxxxx",
-      description:
-        "ああああああああああああああああああああああああああああああああああああああああああああああああああああああああ",
-      dueDate: "2023/12/31",
-      createdAt: "2023/12/31",
-    };
-    rows.push(row);
-  }
+  const search = async (): Promise<void> => {
+    const todoList = await fetchTodo();
+    setTodoList(todoList);
+  };
+
+  const convertDate = (stringDate: string): string => {
+    return DateTime.fromISO(stringDate)
+      .setZone("Asia/Tokyo")
+      .toFormat("yyyy/MM/dd");
+  };
 
   return (
     <div className="container">
       <Panel>
         <PanelHeader>
           検索条件
-          <PanelHeaderButton>
+          <PanelHeaderButton onClick={search}>
             <FontAwesomeIcon icon={faMagnifyingGlass} className="mr-1" />
             検索
           </PanelHeaderButton>
@@ -142,45 +159,51 @@ export default function Search() {
                   <TableHeader style={{ width: "60px" }}>削除</TableHeader>
                 </tr>
               </thead>
-              <tbody>
-                {rows.map((row, index) => (
-                  <tr key={index}>
-                    <td style={{ width: "10px" }}>
-                      <a>#{row.no}</a>
-                    </td>
-                    <td align="center" style={{ width: "110px" }}>
-                      <label className="checkbox">
-                        <input type="checkbox" />
-                      </label>
-                    </td>
-                    <td style={{ width: "20%" }}>{row.title}</td>
-                    <td
-                      style={{
-                        width: "auto",
-                        maxWidth: "400px",
-                        overflow: "hidden",
-                      }}
-                    >
-                      <p
+              {todoList && (
+                <tbody>
+                  {todoList.map((todo, index) => (
+                    <tr key={index}>
+                      <td style={{ width: "10px" }}>
+                        <a>#{todo.id}</a>
+                      </td>
+                      <td align="center" style={{ width: "110px" }}>
+                        <label className="checkbox">
+                          <input type="checkbox" checked={todo.isDone} />
+                        </label>
+                      </td>
+                      <td style={{ width: "20%" }}>{todo.title}</td>
+                      <td
                         style={{
+                          width: "auto",
+                          maxWidth: "400px",
                           overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
                         }}
                       >
-                        {row.description}
-                      </p>
-                    </td>
-                    <td style={{ width: "110px" }}>{row.dueDate}</td>
-                    <td style={{ width: "110px" }}>{row.createdAt}</td>
-                    <td style={{ width: "60px" }}>
-                      <button className="button is-small head-button">
-                        <FontAwesomeIcon icon={faTrashCan} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+                        <p
+                          style={{
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {todo.description}
+                        </p>
+                      </td>
+                      <td style={{ width: "110px" }}>
+                        {convertDate(todo.dueDate)}
+                      </td>
+                      <td style={{ width: "110px" }}>
+                        {convertDate(todo.createdAt)}
+                      </td>
+                      <td style={{ width: "60px" }}>
+                        <button className="button is-small head-button">
+                          <FontAwesomeIcon icon={faTrashCan} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              )}
             </table>
           </TableContainer>
         </PanelBlock>
