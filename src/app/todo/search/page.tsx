@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import styled from "styled-components";
-import { DateTime } from "luxon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DatePicker, { registerLocale } from "react-datepicker";
 import ja from "date-fns/locale/ja";
@@ -11,8 +10,9 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { TodoItem, fetchTodo } from "@/services/todoService";
+import { convertDate } from "@/common/util";
 
-export default function Search() {
+export default function SearchPage() {
   // const rows: TodoItem[] = [];
   // for (let i = 1; i <= 50; i++) {
   //   const row: TodoItem = {
@@ -36,12 +36,6 @@ export default function Search() {
   const search = async (): Promise<void> => {
     const todoList = await fetchTodo();
     setTodoList(todoList);
-  };
-
-  const convertDate = (stringDate: string): string => {
-    return DateTime.fromISO(stringDate)
-      .setZone("Asia/Tokyo")
-      .toFormat("yyyy/MM/dd");
   };
 
   return (
