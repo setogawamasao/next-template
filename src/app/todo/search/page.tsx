@@ -10,7 +10,15 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { TodoItem, fetchTodo } from "@/services/todoService";
-import { convertDate } from "@/common/util";
+import { convertDate } from "@/util/dateUtil";
+import {
+  Panel,
+  PanelHeader,
+  PanelHeaderButton,
+  PanelBlock,
+} from "@/component/panel";
+import { Column, ColumnLabel, Columns, TwoColumn } from "@/component/column";
+import { TableContainer, TableHeader } from "@/component/table";
 
 export default function SearchPage() {
   // const rows: TodoItem[] = [];
@@ -52,7 +60,7 @@ export default function SearchPage() {
           <div className="control p-2">
             <Columns>
               <Column>
-                <Caption>タイトル</Caption>
+                <ColumnLabel>タイトル</ColumnLabel>
               </Column>
               <Column>
                 <input
@@ -62,7 +70,7 @@ export default function SearchPage() {
                 />
               </Column>
               <Column>
-                <Caption>説明</Caption>
+                <ColumnLabel>説明</ColumnLabel>
               </Column>
               <Column>
                 <input
@@ -72,7 +80,7 @@ export default function SearchPage() {
                 />
               </Column>
               <Column>
-                <Caption>完了済</Caption>
+                <ColumnLabel>完了済</ColumnLabel>
               </Column>
               <Column>
                 <div className="select is-small" style={{ width: "100%" }}>
@@ -86,7 +94,7 @@ export default function SearchPage() {
             </Columns>
             <Columns>
               <Column>
-                <Caption>期限</Caption>
+                <ColumnLabel>期限</ColumnLabel>
               </Column>
               <TwoColumn>
                 <DatePicker
@@ -106,7 +114,7 @@ export default function SearchPage() {
                 />
               </TwoColumn>
               <Column>
-                <Caption>登録日</Caption>
+                <ColumnLabel>登録日</ColumnLabel>
               </Column>
               <TwoColumn>
                 {/* <Datepicker
@@ -205,81 +213,3 @@ export default function SearchPage() {
     </div>
   );
 }
-
-const TableContainer = styled.div.attrs({
-  className: "control",
-})`
-  overflow-y: scroll;
-  height: 350px;
-`;
-
-const TableHeader = styled.th.attrs({
-  style: { borderWidth: "0" },
-})`
-  border: none;
-  border-width: none;
-  position: sticky;
-  z-index: 1;
-  top: 0;
-  background: white;
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    border-bottom: 2px solid #dbdbdb;
-  }
-`;
-
-const Panel = styled.div.attrs({
-  className: "panel",
-})`
-  margin: 0.75rem 0 0 0;
-`;
-
-const PanelHeader = styled.div.attrs({
-  className: "panel-heading is-size-6 p-2",
-})`
-  display: flex;
-  align-items: center;
-`;
-
-const PanelHeaderButton = styled.button.attrs({
-  className: "button is-small head-button",
-})`
-  margin-left: auto;
-`;
-
-const PanelBlock = styled.div.attrs({
-  className: "panel-block",
-})``;
-
-const Columns = styled.div.attrs({
-  className: "columns is-vcentered",
-})``;
-
-const Column = styled.div.attrs({
-  className: "column is-2",
-})`
-  padding: 0.25rem;
-`;
-
-const TwoColumn = styled.div.attrs({
-  className: "column is-4 flexbox",
-})`
-  padding: 0.25rem;
-  display: flex;
-  flex-direction: row;
-`;
-
-const Caption = styled.div`
-  background-color: hsl(0, 0%, 93%);
-  color: black;
-  font-size: 0.75rem;
-  padding: 0.35rem;
-  text-align: center;
-  border-radius: 2px;
-`;
