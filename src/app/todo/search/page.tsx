@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -19,6 +20,7 @@ import {
 } from "@/component/panel";
 import { Column, ColumnLabel, Columns, TwoColumn } from "@/component/column";
 import { TableContainer, TableHeader } from "@/component/table";
+import { PageTitle } from "@/component/pageTItle";
 
 export default function SearchPage() {
   // const rows: TodoItem[] = [];
@@ -40,14 +42,20 @@ export default function SearchPage() {
   // const [todoList, setTodoList] = useState<TodoItem[] | undefined>(rows);
 
   registerLocale("ja", ja);
+  const router = useRouter();
 
   const search = async (): Promise<void> => {
     const todoList = await fetchTodo();
     setTodoList(todoList);
   };
 
+  const clickHandler = () => {
+    router.push("/todo/add");
+  };
+
   return (
     <div className="container">
+      <PageTitle>TODO検索</PageTitle>
       <Panel>
         <PanelHeader>
           検索条件
@@ -142,7 +150,7 @@ export default function SearchPage() {
       <Panel>
         <PanelHeader>
           検索結果
-          <PanelHeaderButton>
+          <PanelHeaderButton onClick={() => clickHandler()}>
             <FontAwesomeIcon icon={faPlus} className="mr-1" />
             追加
           </PanelHeaderButton>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mainColor } from "./colorSettings";
 
 export const Panel = styled.div.attrs({
   className: "panel",

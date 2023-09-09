@@ -3,6 +3,8 @@ import { StyledComponentsRegistry } from "@/app/styling/StyledComponentsRegistry
 import "bulma/css/bulma.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "./globals.css";
+import Header from "@/component/header";
+import Footer from "@/component/footer";
 
 export const metadata = {
   title: "Create Next App",
@@ -17,7 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <Header />
+          {children}
+          <Footer />
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

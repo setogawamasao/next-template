@@ -9,3 +9,12 @@
 tr:hover a {
   text-decoration: underline;
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container {
+  width: 100%;
+}
