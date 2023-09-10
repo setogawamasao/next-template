@@ -11,7 +11,7 @@ import {
   faMagnifyingGlass,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
-import { TodoItem, fetchTodo } from "@/services/todoService";
+import { TodoItem, fetchTodo, postTodo } from "@/services/todoService";
 import { PageTitle } from "@/component/pageTItle";
 
 import { MainButton, SubButton } from "@/component/button";
@@ -23,13 +23,14 @@ export default function AddForm() {
   const {
     register,
     handleSubmit,
-    watch,
+    setValue,
     control,
     formState: { errors, isValid },
   } = useForm<TodoItem>({ mode: "onChange" });
 
-  const onSubmit: SubmitHandler<TodoItem> = (data: TodoItem) => {
-    console.log("data", data);
+  const registerTodo: SubmitHandler<TodoItem> = async (todo: TodoItem) => {
+    console.log(todo);
+    await postTodo(todo);
   };
 
   return (
@@ -98,16 +99,11 @@ export default function AddForm() {
           <label className="label">ステータス</label>
           <div className="control">
             <label className="radio">
-              <input
-                type="radio"
-                {...register("isDone")}
-                defaultChecked={true}
-                value={"false"}
-              />
+              <input type="radio" onChange={() => setValue("isDone", false)} />
               未完了
             </label>
             <label className="radio">
-              <input type="radio" {...register("isDone")} value={"true"} />
+              <input type="radio" onChange={() => setValue("isDone", true)} />
               完了
             </label>
           </div>
@@ -122,7 +118,7 @@ export default function AddForm() {
             </SubButton>
           </div>
           <div className="control">
-            <MainButton onClick={handleSubmit(onSubmit)}>登録</MainButton>
+            <MainButton onClick={handleSubmit(registerTodo)}>登録</MainButton>
           </div>
         </div>
       </div>

@@ -18,7 +18,16 @@ export const fetchTodo = async (): Promise<TodoItem[]> => {
   return response.data;
 };
 
-export const registerTodo = async (): Promise<TodoItem[]> => {
-  const response = await client.post<TodoItem[]>(`/todo`);
+export const postTodo = async (todo: TodoItem): Promise<TodoItem[]> => {
+  console.log("todo", todo);
+
+  const todo1 = {
+    title: todo.title,
+    description: todo.description,
+    dueDate: todo.dueDate,
+    isDone: todo.isDone,
+  };
+
+  const response = await client.post(`/todo`, todo1);
   return response.data;
 };
