@@ -125,23 +125,21 @@ export default function SearchPage() {
                 <ColumnLabel>登録日</ColumnLabel>
               </Column>
               <TwoColumn>
-                {/* <Datepicker
-                v-model="createdAtFrom"
-                :language="ja"
-                :format="$formatDate.fromJs"
-                placeholder="from"
-                style="width: 100%"
-                input-className="input form is-small"
-              /> */}
+                <DatePicker
+                  dateFormat="yyyy/MM/dd"
+                  locale="ja"
+                  selected={selectedDate}
+                  onChange={(date: Date) => setSelectedDate(date!)}
+                  className="input form is-small"
+                />
                 <span className="mx-2">-</span>
-                {/* <Datepicker
-                v-model="createdAtTo"
-                :language="ja"
-                :format="$formatDate.fromJs"
-                placeholder="to"
-                style="width: 100%"
-                input-className="input form is-small"
-              /> */}
+                <DatePicker
+                  dateFormat="yyyy/MM/dd"
+                  locale="ja"
+                  selected={selectedDate}
+                  onChange={(date: Date) => setSelectedDate(date!)}
+                  className="input form is-small"
+                />
               </TwoColumn>
             </Columns>
           </div>
@@ -150,7 +148,7 @@ export default function SearchPage() {
       <Panel>
         <PanelHeader>
           検索結果
-          <PanelHeaderButton onClick={() => clickHandler()}>
+          <PanelHeaderButton onClick={() => router.push("/todo/add")}>
             <FontAwesomeIcon icon={faPlus} className="mr-1" />
             追加
           </PanelHeaderButton>

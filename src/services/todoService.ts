@@ -6,7 +6,7 @@ export type TodoItem = {
   id: number;
   title: string;
   description: string;
-  dueDate: string;
+  dueDate: Date;
   isDone: boolean;
   createdAt: string;
   updatedAt: string;
