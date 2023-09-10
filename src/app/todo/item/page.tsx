@@ -31,6 +31,7 @@ export default function AddForm() {
   const registerTodo: SubmitHandler<TodoItem> = async (todo: TodoItem) => {
     console.log(todo);
     await postTodo(todo);
+    router.push("/todo/search");
   };
 
   return (
