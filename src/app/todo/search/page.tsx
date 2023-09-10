@@ -88,7 +88,7 @@ export default function SearchPage() {
                 />
               </Column>
               <Column>
-                <ColumnLabel>完了済</ColumnLabel>
+                <ColumnLabel>ステータス</ColumnLabel>
               </Column>
               <Column>
                 <div className="select is-small" style={{ width: "100%" }}>
@@ -148,7 +148,7 @@ export default function SearchPage() {
       <Panel>
         <PanelHeader>
           検索結果
-          <PanelHeaderButton onClick={() => router.push("/todo/add")}>
+          <PanelHeaderButton onClick={() => router.push("/todo/item")}>
             <FontAwesomeIcon icon={faPlus} className="mr-1" />
             追加
           </PanelHeaderButton>
@@ -159,7 +159,9 @@ export default function SearchPage() {
               <thead>
                 <tr>
                   <TableHeader style={{ width: "10px" }}>No</TableHeader>
-                  <TableHeader style={{ minWidth: "75px" }}>完了</TableHeader>
+                  <TableHeader style={{ minWidth: "75px" }}>
+                    ステータス
+                  </TableHeader>
                   <TableHeader style={{ width: "20%" }}>タイトル</TableHeader>
                   <TableHeader style={{ width: "auto" }}>説明</TableHeader>
                   <TableHeader style={{ width: "110px" }}>期限</TableHeader>

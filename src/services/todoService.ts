@@ -16,3 +16,8 @@ export const fetchTodo = async (): Promise<TodoItem[]> => {
   const response = await client.get<TodoItem[]>(`/todo/search`);
   return response.data;
 };
+
+export const registerTodo = async (): Promise<TodoItem[]> => {
+  const response = await client.get<TodoItem[]>(`/todo/search`);
+  return response.data;
+};
