@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,7 @@ import {
   faMagnifyingGlass,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
-import { TodoItem, fetchTodo } from "@/services/todoService";
+import { TodoItem, deleteTodo, fetchTodo } from "@/services/todoService";
 import { convertDate } from "@/util/dateUtil";
 import {
   Panel,
@@ -49,9 +49,14 @@ export default function SearchPage() {
     setTodoList(todoList);
   };
 
-  const clickHandler = () => {
-    router.push("/todo/add");
+  const rejectTodo = async (id: number): Promise<void> => {
+    await deleteTodo(id);
+    await search();
   };
+
+  useEffect(() => {
+    search();
+  }, []);
 
   return (
     <div className="container">
@@ -206,7 +211,10 @@ export default function SearchPage() {
                         {convertDate(todo.createdAt)}
                       </td>
                       <td style={{ width: "60px" }}>
-                        <button className="button is-small head-button">
+                        <button
+                          className="button is-small head-button"
+                          onClick={() => rejectTodo(todo.id)}
+                        >
                           <FontAwesomeIcon icon={faTrashCan} />
                         </button>
                       </td>
