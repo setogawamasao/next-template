@@ -179,7 +179,9 @@ export default function SearchPage() {
                   {todoList.map((todo, index) => (
                     <tr key={index}>
                       <td style={{ width: "10px" }}>
-                        <a>#{todo.id}</a>
+                        <a onClick={() => router.push(`/todo/item`)}>
+                          #{todo.id}
+                        </a>
                       </td>
                       <td align="center" style={{ width: "110px" }}>
                         <label className="checkbox">
