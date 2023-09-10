@@ -176,7 +176,7 @@ export default function SearchPage() {
                       </td>
                       <td align="center" style={{ width: "110px" }}>
                         <label className="checkbox">
-                          <input type="checkbox" checked={todo.isDone} />
+                          <input type="checkbox" defaultChecked={todo.isDone} />
                         </label>
                       </td>
                       <td style={{ width: "20%" }}>{todo.title}</td>

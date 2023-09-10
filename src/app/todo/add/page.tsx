@@ -98,11 +98,16 @@ export default function AddForm() {
           <label className="label">ステータス</label>
           <div className="control">
             <label className="radio">
-              <input type="radio" name="question" defaultChecked={true} />
+              <input
+                type="radio"
+                {...register("isDone")}
+                defaultChecked={true}
+                value={"false"}
+              />
               未完了
             </label>
             <label className="radio">
-              <input type="radio" name="question" />
+              <input type="radio" {...register("isDone")} value={"true"} />
               完了
             </label>
           </div>

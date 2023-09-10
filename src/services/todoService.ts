@@ -8,8 +8,8 @@ export type TodoItem = {
   description: string;
   dueDate: Date;
   isDone: boolean;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export const fetchTodo = async (): Promise<TodoItem[]> => {
