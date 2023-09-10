@@ -88,6 +88,7 @@ export default function AddForm() {
                   onChange={onChange}
                   selected={value as Date}
                   className="input"
+                  placeholderText="YYYY/MM/DD"
                 />
               )}
             />

@@ -116,6 +116,7 @@ export default function SearchPage() {
                   selected={selectedDate}
                   onChange={(date: Date) => setSelectedDate(date!)}
                   className="input form is-small"
+                  placeholderText="YYYY/MM/DD"
                 />
                 <span className="mx-2">-</span>
                 <DatePicker
@@ -124,6 +125,7 @@ export default function SearchPage() {
                   selected={selectedDate}
                   onChange={(date: Date) => setSelectedDate(date!)}
                   className="input form is-small"
+                  placeholderText="YYYY/MM/DD"
                 />
               </TwoColumn>
               <Column>
@@ -136,6 +138,7 @@ export default function SearchPage() {
                   selected={selectedDate}
                   onChange={(date: Date) => setSelectedDate(date!)}
                   className="input form is-small"
+                  placeholderText="YYYY/MM/DD"
                 />
                 <span className="mx-2">-</span>
                 <DatePicker
@@ -144,6 +147,7 @@ export default function SearchPage() {
                   selected={selectedDate}
                   onChange={(date: Date) => setSelectedDate(date!)}
                   className="input form is-small"
+                  placeholderText="YYYY/MM/DD"
                 />
               </TwoColumn>
             </Columns>
