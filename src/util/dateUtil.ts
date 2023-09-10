@@ -1,6 +1,4 @@
 import { DateTime } from "luxon";
-export const convertDate = (stringDate: string): string => {
-  return DateTime.fromISO(stringDate)
-    .setZone("Asia/Tokyo")
-    .toFormat("yyyy/MM/dd");
+export const convertDate = (date: Date): string => {
+  return DateTime.fromJSDate(date).setZone("Asia/Tokyo").toFormat("yyyy/MM/dd");
 };

@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 // import { UserItem } from "./userService";
 import { client } from "./apiClient";
 // import { parseApiError } from "./parseApiError";
@@ -18,6 +19,6 @@ export const fetchTodo = async (): Promise<TodoItem[]> => {
 };
 
 export const registerTodo = async (): Promise<TodoItem[]> => {
-  const response = await client.get<TodoItem[]>(`/todo/search`);
+  const response = await client.post<TodoItem[]>(`/todo`);
   return response.data;
 };
