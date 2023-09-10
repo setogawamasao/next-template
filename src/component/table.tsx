@@ -4,7 +4,7 @@ export const TableContainer = styled.div.attrs({
   className: "control",
 })`
   overflow-y: scroll;
-  height: 350px;
+  height: 340px;
 `;
 
 export const TableHeader = styled.th.attrs({

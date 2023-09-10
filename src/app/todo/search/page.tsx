@@ -163,7 +163,7 @@ export default function SearchPage() {
                   <TableHeader style={{ width: "10px" }}>No</TableHeader>
                   <TableHeader style={{ minWidth: "75px" }}>完了</TableHeader>
                   <TableHeader style={{ width: "20%" }}>タイトル</TableHeader>
-                  <TableHeader style={{ width: "auto" }}>内容</TableHeader>
+                  <TableHeader style={{ width: "auto" }}>説明</TableHeader>
                   <TableHeader style={{ width: "110px" }}>期限</TableHeader>
                   <TableHeader style={{ width: "110px" }}>登録日</TableHeader>
                   <TableHeader style={{ width: "60px" }}>削除</TableHeader>
