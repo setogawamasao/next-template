@@ -9,4 +9,6 @@ const nextConfig = {
   },
 };
 
+console.log("http://localhost:3000/todo/search");
+
 module.exports = nextConfig;

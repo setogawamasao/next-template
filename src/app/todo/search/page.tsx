@@ -21,25 +21,27 @@ import {
 import { Column, ColumnLabel, Columns, TwoColumn } from "@/component/column";
 import { TableContainer, TableHeader } from "@/component/table";
 import { PageTitle } from "@/component/pageTItle";
+import { useTodoStore } from "@/states/todoStore";
 
 export default function SearchPage() {
-  // const rows: TodoItem[] = [];
-  // for (let i = 1; i <= 50; i++) {
-  //   const row: TodoItem = {
-  //     id: i,
-  //     title: "xxxxxxxxxxxxxxxx",
-  //     description: "あああああああああああああああああああああああああああ",
-  //     dueDate: new Date(),
-  //     isDone: false,
-  //     createdAt: new Date(),
-  //     updatedAt: new Date(),
-  //   };
-  //   rows.push(row);
-  // }
+  const rows: TodoItem[] = [];
+  for (let i = 1; i <= 50; i++) {
+    const row: TodoItem = {
+      id: i,
+      title: "xxxxxxxxxxxxxxxx",
+      description: "あああああああああああああああああああああああああああ",
+      dueDate: new Date(),
+      isDone: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    rows.push(row);
+  }
 
   const [selectedDate, setSelectedDate] = useState<Date>();
-  const [todoList, setTodoList] = useState<TodoItem[] | undefined>(undefined);
-  // const [todoList, setTodoList] = useState<TodoItem[] | undefined>(rows);
+  //const [todoList, setTodoList] = useState<TodoItem[] | undefined>(undefined);
+  const [todoList, setTodoList] = useState<TodoItem[] | undefined>(rows);
+  const { setTodo, resetTodo } = useTodoStore();
 
   registerLocale("ja", ja);
   const router = useRouter();
@@ -54,9 +56,19 @@ export default function SearchPage() {
     await search();
   };
 
-  useEffect(() => {
-    search();
-  }, []);
+  const goToItemPage = (todo?: TodoItem) => {
+    if (todo) {
+      setTodo(todo);
+      router.push(`/todo/items/${todo.id}`);
+    } else {
+      resetTodo();
+      router.push("/todo/items/new");
+    }
+  };
+
+  // useEffect(() => {
+  //   search();
+  // }, []);
 
   return (
     <div className="container">
@@ -157,7 +169,7 @@ export default function SearchPage() {
       <Panel>
         <PanelHeader>
           検索結果
-          <PanelHeaderButton onClick={() => router.push("/todo/item")}>
+          <PanelHeaderButton onClick={() => goToItemPage()}>
             <FontAwesomeIcon icon={faPlus} className="mr-1" />
             追加
           </PanelHeaderButton>
@@ -183,9 +195,7 @@ export default function SearchPage() {
                   {todoList.map((todo, index) => (
                     <tr key={index}>
                       <td style={{ width: "10px" }}>
-                        <a onClick={() => router.push(`/todo/item`)}>
-                          #{todo.id}
-                        </a>
+                        <a onClick={() => goToItemPage(todo)}>#{todo.id}</a>
                       </td>
                       <td align="center" style={{ width: "110px" }}>
                         <label className="checkbox">

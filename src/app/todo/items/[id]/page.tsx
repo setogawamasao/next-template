@@ -11,6 +11,7 @@ import {
   faMagnifyingGlass,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
+import { useTodoStore } from "@/states/todoStore";
 import { TodoItem, fetchTodo, postTodo } from "@/services/todoService";
 import { PageTitle } from "@/component/pageTItle";
 
@@ -20,13 +21,14 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form";
 export default function AddForm() {
   registerLocale("ja", ja);
   const router = useRouter();
+  const { todo } = useTodoStore();
   const {
     register,
     handleSubmit,
     setValue,
     control,
     formState: { errors, isValid },
-  } = useForm<TodoItem>({ mode: "onChange" });
+  } = useForm<TodoItem>({ mode: "onChange", defaultValues: todo });
 
   const registerTodo: SubmitHandler<TodoItem> = async (todo: TodoItem) => {
     console.log(todo);
