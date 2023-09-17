@@ -12,8 +12,9 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { useTodoStore } from "@/states/todoStore";
-import { TodoItem, fetchTodo, postTodo } from "@/services/todoService";
-import { PageTitle } from "@/components/pageTItle";
+import { fetchTodo, postTodo } from "@/services/todoService";
+import { TodoItem } from "@/types/todoItem";
+import { PageTitle } from "@/components/pageTitle";
 
 import { MainButton, SubButton } from "@/components/button";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
