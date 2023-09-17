@@ -1,3 +1,4 @@
+// HINT:https://plainenglish.io/blog/using-zustand-and-typescript-to-make-a-to-do-list-in-react
 import { create } from "zustand";
 import { TodoItem } from "@/types/todoItem";
 

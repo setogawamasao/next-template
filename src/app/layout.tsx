@@ -1,3 +1,4 @@
+// HINT:https://reffect.co.jp/react/next-js-13/#robotstxt
 import type { Metadata } from "next";
 import { StyledComponentsRegistry } from "@/components/StyledComponentsRegistry";
 // CSSは後に書いたほうが強い
