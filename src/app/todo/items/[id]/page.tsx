@@ -13,9 +13,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useTodoStore } from "@/states/todoStore";
 import { TodoItem, fetchTodo, postTodo } from "@/services/todoService";
-import { PageTitle } from "@/component/pageTItle";
+import { PageTitle } from "@/components/pageTItle";
 
-import { MainButton, SubButton } from "@/component/button";
+import { MainButton, SubButton } from "@/components/button";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 
 export default function AddForm() {

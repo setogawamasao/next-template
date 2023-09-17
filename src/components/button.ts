@@ -4,7 +4,7 @@ import {
   mainColorFont,
   subColor,
   subColorFont,
-} from "@/component/colorSettings";
+} from "@/components/colorSettings";
 
 export const MainButton = styled.button.attrs({
   className: "button",

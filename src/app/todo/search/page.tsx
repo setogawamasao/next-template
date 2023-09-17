@@ -11,16 +11,16 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { TodoItem, deleteTodo, fetchTodo } from "@/services/todoService";
-import { convertDate } from "@/util/dateUtil";
+import { convertDate } from "@/utils/dateUtil";
 import {
   Panel,
   PanelHeader,
   PanelHeaderButton,
   PanelBlock,
-} from "@/component/panel";
-import { Column, ColumnLabel, Columns, TwoColumn } from "@/component/column";
-import { TableContainer, TableHeader } from "@/component/table";
-import { PageTitle } from "@/component/pageTItle";
+} from "@/components/panel";
+import { Column, ColumnLabel, Columns, TwoColumn } from "@/components/column";
+import { TableContainer, TableHeader } from "@/components/table";
+import { PageTitle } from "@/components/pageTItle";
 import { useTodoStore } from "@/states/todoStore";
 
 export default function SearchPage() {
