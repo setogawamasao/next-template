@@ -1,11 +1,20 @@
 "use client";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import logo from "@/images/logo.png";
 import styled from "styled-components";
 import { mainColor, mainColorFont } from "./colorSettings";
 
 export default function Header() {
+  const router = useRouter();
   return (
     <HeaderStyle>
-      <HeaderTitle>SAMPLE</HeaderTitle>
+      <Image
+        src={logo}
+        alt="logo"
+        onClick={() => router.push("/todo/search")}
+      />
+      {/* <HeaderTitle>SAMPLE</HeaderTitle> */}
     </HeaderStyle>
   );
 }

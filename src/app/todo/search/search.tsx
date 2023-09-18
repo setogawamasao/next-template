@@ -23,6 +23,8 @@ import { Column, ColumnLabel, Columns, TwoColumn } from "@/components/column";
 import { TableContainer, TableHeader } from "@/components/table";
 import { PageTitle } from "@/components/pageTitle";
 import { useTodoStore } from "@/states/todoStore";
+import { useMessage } from "@/states/messageStore";
+import { handleError, showWhile } from "@/services/errorHandler";
 
 export default function SearchPage() {
   const rows: TodoItem[] = [];
@@ -43,6 +45,7 @@ export default function SearchPage() {
   //const [todoList, setTodoList] = useState<TodoItem[] | undefined>(undefined);
   const [todoList, setTodoList] = useState<TodoItem[] | undefined>(rows);
   const { setTodo, resetTodo } = useTodoStore();
+  const { setMessage, open } = useMessage();
 
   registerLocale("ja", ja);
   const router = useRouter();
@@ -50,6 +53,11 @@ export default function SearchPage() {
   const search = async (): Promise<void> => {
     const todoList = await fetchTodo();
     setTodoList(todoList);
+  };
+
+  const handleSearch = async (): Promise<void> => {
+    console.log("handleSearch");
+    showWhile(search).catch(handleError);
   };
 
   const rejectTodo = async (id: number): Promise<void> => {
@@ -77,7 +85,7 @@ export default function SearchPage() {
       <Panel>
         <PanelHeader>
           検索条件
-          <PanelHeaderButton onClick={search}>
+          <PanelHeaderButton onClick={handleSearch}>
             <FontAwesomeIcon icon={faMagnifyingGlass} className="mr-1" />
             検索
           </PanelHeaderButton>

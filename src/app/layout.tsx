@@ -1,12 +1,15 @@
 // HINT:https://reffect.co.jp/react/next-js-13/#robotstxt
 import type { Metadata } from "next";
-import { StyledComponentsRegistry } from "@/components/StyledComponentsRegistry";
+import { StyledComponentsRegistry } from "@/components/styledComponentsRegistry";
 // CSSは後に書いたほうが強い
 import "bulma/css/bulma.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "@/styles/globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import MessageBox from "@/components/messageBox";
+import Loading from "@/components/loading";
+import { ErrorHandlerSetup } from "@/components/ErrorHandlerSetup";
 
 export const metadata: Metadata = {
   title: {
@@ -21,6 +24,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // throw new Error("test");
   return (
     <html lang="en">
       <body>
@@ -28,6 +32,10 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <ErrorHandlerSetup>
+            <MessageBox />
+            <Loading />
+          </ErrorHandlerSetup>
         </StyledComponentsRegistry>
       </body>
     </html>
