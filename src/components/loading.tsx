@@ -13,12 +13,16 @@ export default function Loading() {
   return (
     <div
       style={{
-        bottom: "0",
-        left: "0",
-        right: "0",
         top: "0",
+        left: "0",
+        width: "100%",
+        height: "100%",
         position: "absolute",
-        background: "rgba(0, 0, 255, .8)",
+        // background: "rgba(0, 0, 255, .8)",
+        zIndex: "1",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Oval
@@ -27,7 +31,7 @@ export default function Loading() {
         color={mainColor}
         secondaryColor={subColor}
         wrapperStyle={{}}
-        wrapperClass="loading"
+        wrapperClass=""
         visible={true}
         ariaLabel="oval-loading"
         strokeWidth={2}

@@ -2,9 +2,9 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DatePicker, { registerLocale } from "react-datepicker";
 import ja from "date-fns/locale/ja";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
   faMagnifyingGlass,
@@ -23,8 +23,9 @@ import { Column, ColumnLabel, Columns, TwoColumn } from "@/components/column";
 import { TableContainer, TableHeader } from "@/components/table";
 import { PageTitle } from "@/components/pageTitle";
 import { useTodoStore } from "@/states/todoStore";
+import { useLoading } from "@/states/loadingStore";
 import { useMessage } from "@/states/messageStore";
-import { handleError, showWhile } from "@/services/errorHandler";
+// import { handleError } from "@/services/errorHandler";
 
 export default function SearchPage() {
   const rows: TodoItem[] = [];
@@ -41,13 +42,13 @@ export default function SearchPage() {
     rows.push(row);
   }
 
+  registerLocale("ja", ja);
   const [selectedDate, setSelectedDate] = useState<Date>();
   //const [todoList, setTodoList] = useState<TodoItem[] | undefined>(undefined);
   const [todoList, setTodoList] = useState<TodoItem[] | undefined>(rows);
   const { setTodo, resetTodo } = useTodoStore();
-  const { setMessage, open } = useMessage();
-
-  registerLocale("ja", ja);
+  const { showWhile } = useLoading();
+  const { handleError } = useMessage();
   const router = useRouter();
 
   const search = async (): Promise<void> => {
@@ -56,7 +57,6 @@ export default function SearchPage() {
   };
 
   const handleSearch = async (): Promise<void> => {
-    console.log("handleSearch");
     showWhile(search).catch(handleError);
   };
 
