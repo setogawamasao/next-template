@@ -1,0 +1,11 @@
+// please check this URL
+// https://future-architect.github.io/articles/20200828/
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "humao.rest-client",
+    "mosapride.zenkaku"
+  ]
+}
