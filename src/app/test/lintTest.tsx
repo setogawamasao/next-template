@@ -13,7 +13,7 @@ export const Component: FC = () => {
 
   return (
     <div>
-      {anyObj.hoge} {foo}
+      {anyObj.noWord} {foo}
     </div>
   );
 };

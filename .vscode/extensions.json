@@ -6,6 +6,7 @@
     "esbenp.prettier-vscode",
     "streetsidesoftware.code-spell-checker",
     "humao.rest-client",
-    "mosapride.zenkaku"
+    "mosapride.zenkaku",
+    "shardulm94.trailing-spaces"
   ]
 }

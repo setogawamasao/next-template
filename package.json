@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "spell-check": "cspell src/**/*.* -c cSpell.json"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
@@ -36,6 +37,9 @@
     "@types/react-datepicker": "^4.11.2",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "eslint-config-prettier": "^9.0.0"
+    "cspell": "^7.3.7",
+    "eslint-config-prettier": "^9.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1"
   }
 }
