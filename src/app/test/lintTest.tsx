@@ -2,7 +2,7 @@
 import { FC } from "react";
 
 export const Component: FC = () => {
-  let anyObj: any;
+  let anyObj: any; //test
   const foo = anyObj();
 
   const returnAnyFunc = () => {
