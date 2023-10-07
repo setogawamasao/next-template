@@ -1,18 +1,12 @@
 "use client";
-import { useState } from "react";
-import styled from "styled-components";
+
 import { useRouter } from "next/navigation";
-import { DateTime } from "luxon";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import DatePicker, { registerLocale } from "react-datepicker";
 import ja from "date-fns/locale/ja";
-import {
-  faPlus,
-  faMagnifyingGlass,
-  faTrashCan,
-} from "@fortawesome/free-solid-svg-icons";
+
 import { useTodoStore } from "@/states/todoStore";
-import { fetchTodo, postTodo } from "@/services/todoService";
+import { postTodo } from "@/services/todoService";
 import { TodoItem } from "@/types/todoItem";
 import { PageTitle } from "@/components/pageTitle";
 
@@ -28,7 +22,7 @@ export default function AddForm() {
     handleSubmit,
     setValue,
     control,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<TodoItem>({ mode: "onChange", defaultValues: todo });
 
   const registerTodo: SubmitHandler<TodoItem> = async (todo: TodoItem) => {

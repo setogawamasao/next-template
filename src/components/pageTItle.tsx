@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { mainColor } from "./colorSettings";
 
 export const PageTitle = styled.div`
   font-size: 1.8rem;

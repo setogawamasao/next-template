@@ -8,6 +8,7 @@ function dateParseChallenge(key: string, val: any) {
       return new Date(time);
     }
   }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return val;
 }
 
@@ -21,11 +22,13 @@ const client = axios.create({
   transformResponse: (data: any) => {
     if (typeof data === "string") {
       try {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return JSON.parse(data, dateParseChallenge);
       } catch (e) {
         // Ignore error
       }
     }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return data;
   },
 });

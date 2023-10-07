@@ -1,7 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import styled from "styled-components";
 import DatePicker, { registerLocale } from "react-datepicker";
 import ja from "date-fns/locale/ja";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -135,7 +134,7 @@ export default function SearchPage() {
                   dateFormat="yyyy/MM/dd"
                   locale="ja"
                   selected={selectedDate}
-                  onChange={(date: Date) => setSelectedDate(date!)}
+                  onChange={(date: Date) => setSelectedDate(date)}
                   className="input form is-small"
                   placeholderText="YYYY/MM/DD"
                 />
@@ -144,7 +143,7 @@ export default function SearchPage() {
                   dateFormat="yyyy/MM/dd"
                   locale="ja"
                   selected={selectedDate}
-                  onChange={(date: Date) => setSelectedDate(date!)}
+                  onChange={(date: Date) => setSelectedDate(date)}
                   className="input form is-small"
                   placeholderText="YYYY/MM/DD"
                 />
@@ -157,7 +156,7 @@ export default function SearchPage() {
                   dateFormat="yyyy/MM/dd"
                   locale="ja"
                   selected={selectedDate}
-                  onChange={(date: Date) => setSelectedDate(date!)}
+                  onChange={(date: Date) => setSelectedDate(date)}
                   className="input form is-small"
                   placeholderText="YYYY/MM/DD"
                 />
@@ -166,7 +165,7 @@ export default function SearchPage() {
                   dateFormat="yyyy/MM/dd"
                   locale="ja"
                   selected={selectedDate}
-                  onChange={(date: Date) => setSelectedDate(date!)}
+                  onChange={(date: Date) => setSelectedDate(date)}
                   className="input form is-small"
                   placeholderText="YYYY/MM/DD"
                 />

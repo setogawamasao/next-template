@@ -1,11 +1,10 @@
 "use client";
-import styled from "styled-components";
 import { useMessage } from "@/states/messageStore";
 import { useLoading } from "@/states/loadingStore";
 
 export default function MessageBox() {
   const { setMessage, open } = useMessage();
-  const { show, hide } = useLoading();
+  const { show } = useLoading();
 
   const openMessage = () => {
     setMessage("こんちには");

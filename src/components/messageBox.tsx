@@ -1,9 +1,8 @@
 "use client";
-import styled from "styled-components";
 import { useMessage } from "@/states/messageStore";
 
 export default function MessageBox() {
-  const { message, isOpen, open, close } = useMessage();
+  const { message, isOpen, close } = useMessage();
   return (
     <div className={`modal ${isOpen ? "is-active" : undefined}`}>
       <div className="modal-background" onClick={close}></div>

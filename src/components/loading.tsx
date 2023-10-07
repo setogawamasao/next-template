@@ -1,7 +1,6 @@
 "use client";
-import styled from "styled-components";
 import { useLoading } from "@/states/loadingStore";
-import { MutatingDots, Oval } from "react-loader-spinner";
+import { Oval } from "react-loader-spinner";
 import { mainColor, subColor } from "./colorSettings";
 
 export default function Loading() {

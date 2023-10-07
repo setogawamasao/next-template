@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { AxiosError } from "axios";
 
 type messageStore = {
-  message?: String;
+  message?: string;
   isOpen: boolean;
   setMessage: (message: string) => void;
   open: () => void;

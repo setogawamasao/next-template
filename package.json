@@ -34,6 +34,8 @@
   "devDependencies": {
     "@types/luxon": "^3.3.1",
     "@types/react-datepicker": "^4.11.2",
-    "@types/styled-components": "^5.1.26"
+    "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "eslint-config-prettier": "^9.0.0"
   }
 }
