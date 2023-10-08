@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier --write src/**/*.{ts,tsx}",
     "spell-check": "cspell src/**/*.* -c cSpell.json"
   },
   "dependencies": {
