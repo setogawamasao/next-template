@@ -1,7 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { loadEnvConfig } from "@next/env";
+import config from "@/configs/local.json";
 
 export default async (): Promise<void> => {
-  const projectDir = process.cwd();
-  loadEnvConfig(projectDir);
+  for (const [key, value] of Object.entries(config)) {
+    console.log(`${key} : ${value}`);
+    process.env[key] = String(value);
+  }
 };
