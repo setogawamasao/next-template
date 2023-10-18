@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "APP_ENV=local next dev",
+    "build": "APP_ENV=development next build",
+    "start": "APP_ENV=development ./node_modules/next/dist/bin/next start",
     "lint": "next lint",
     "format": "prettier --write ./**/*.{ts,tsx,yml,yaml,json}",
-    "check-spell": "cspell src/**/*.* -c cSpell.json"
+    "check-spell": "cspell src -c cSpell.json"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "6.4.0",

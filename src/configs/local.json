@@ -1,0 +1,7 @@
+{
+  "APP_HOST": "http://localhost:3000",
+  "API_HOST": "http://localhost:3001",
+  "AUTH_HOST": "http://[auth-host]",
+  "AUTH_CLIENT": "tLPlPOv5eYHLfM8OhM45CmZmDJVt2tml",
+  "API_TIMEOUT_MINUTES": 1
+}

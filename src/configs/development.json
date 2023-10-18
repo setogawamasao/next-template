@@ -1,0 +1,7 @@
+{
+  "APP_HOST": "https://[development-api-host]",
+  "API_HOST": "http://[development-api-host]",
+  "AUTH_HOST": "http://[development-auth-host]",
+  "AUTH_CLIENT": "XXXXX",
+  "API_TIMEOUT_MINUTES": 1
+}

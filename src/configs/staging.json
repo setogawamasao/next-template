@@ -1,0 +1,5 @@
+{
+  "API_HOST": "http://[staging-host]",
+  "API_PORT": 3001,
+  "API_TIMEOUT_MINUTES": 1
+}

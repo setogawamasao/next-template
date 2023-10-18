@@ -1,4 +1,7 @@
 import axios from "axios";
+import { getAppConfig } from "@/configs/config";
+
+const { apiHost, timeoutMinutes } = getAppConfig();
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function dateParseChallenge(key: string, val: any) {
@@ -13,8 +16,8 @@ function dateParseChallenge(key: string, val: any) {
 }
 
 const client = axios.create({
-  baseURL: "http://localhost:3001",
-  timeout: 60 * 1000,
+  baseURL: apiHost,
+  timeout: timeoutMinutes * 60 * 1000,
   headers: {
     "Content-Type": "application/json; charset=utf-8",
   },

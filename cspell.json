@@ -3,10 +3,13 @@
   "words": [
     "bulma",
     "datepicker",
-    "fortawesome",
     "FontAwesome",
+    "fortawesome",
     "fullwidth",
     "luxon",
+    "nextjs",
+    "nosniff",
+    "SAMEORIGIN",
     "vcentered",
     "zustand"
   ]
