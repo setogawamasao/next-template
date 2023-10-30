@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "APP_ENV=local next dev",
+    "dev": "next dev",
     "build": "APP_ENV=development next build",
     "start": "APP_ENV=development ./node_modules/next/dist/bin/next start",
     "lint": "next lint",

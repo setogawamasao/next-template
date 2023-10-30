@@ -27,10 +27,10 @@ const nextConfig = {
           },
           { key: "X-XSS-Protection", value: "1; mode=block" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-          {
-            key: "Content-Security-Policy",
-            value: `default-src 'self' data: 'unsafe-inline' 'unsafe-eval'`,
-          },
+          // {
+          //   key: "Content-Security-Policy",
+          //   value: `default-src 'self' data: 'unsafe-inline' 'unsafe-eval'`,
+          // },
           {
             key: "Permissions-Policy",
             value: "geolocation=(self), camera=(self)",

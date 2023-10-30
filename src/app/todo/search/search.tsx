@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { deleteTodo, fetchTodo } from "@/services/todoService";
 import { TodoItem } from "@/types/todoItem";
-import { convertDate } from "@/utils/dateUtil";
+import { convertDateToString } from "@/utils/dateUtil";
 import {
   Panel,
   PanelHeader,
@@ -24,7 +24,8 @@ import { PageTitle } from "@/components/pageTitle";
 import { useTodoStore } from "@/states/todoStore";
 import { useLoading } from "@/states/loadingStore";
 import { useMessage } from "@/states/messageStore";
-// import { handleError } from "@/services/errorHandler";
+import { SearchConditions } from "@/types/searchCondition";
+import { Controller, useForm } from "react-hook-form";
 
 export default function SearchPage() {
   const rows: TodoItem[] = [];
@@ -41,17 +42,31 @@ export default function SearchPage() {
     rows.push(row);
   }
 
+  const { register, control, getValues } = useForm<SearchConditions>({
+    mode: "onChange",
+  });
+
   registerLocale("ja", ja);
   const [selectedDate, setSelectedDate] = useState<Date>();
-  //const [todoList, setTodoList] = useState<TodoItem[] | undefined>(undefined);
-  const [todoList, setTodoList] = useState<TodoItem[] | undefined>(rows);
+  const [todoList, setTodoList] = useState<TodoItem[] | undefined>(undefined);
+  //const [todoList, setTodoList] = useState<TodoItem[] | undefined>(rows);
   const { setTodo, resetTodo } = useTodoStore();
   const { showWhile } = useLoading();
   const { handleError } = useMessage();
   const router = useRouter();
 
   const search = async (): Promise<void> => {
-    const todoList = await fetchTodo();
+    const searchCondition: SearchConditions = {
+      title: getValues("title"),
+      description: getValues("description"),
+      isDone: getValues("isDone"),
+      dueDateFrom: getValues("dueDateFrom"),
+      dueDateTo: undefined,
+      createdAtFrom: undefined,
+      createdAtTo: undefined,
+    };
+    const todoList = await fetchTodo(searchCondition);
+    console.log(todoList);
     setTodoList(todoList);
   };
 
@@ -100,6 +115,7 @@ export default function SearchPage() {
                   className="input is-small"
                   type="text"
                   placeholder="Text input"
+                  {...register("title")}
                 />
               </Column>
               <Column>
@@ -110,6 +126,7 @@ export default function SearchPage() {
                   className="input is-small"
                   type="text"
                   placeholder="Text input"
+                  {...register("description")}
                 />
               </Column>
               <Column>
@@ -117,7 +134,7 @@ export default function SearchPage() {
               </Column>
               <Column>
                 <div className="select is-small" style={{ width: "100%" }}>
-                  <select style={{ width: "100%" }}>
+                  <select style={{ width: "100%" }} {...register("isDone")}>
                     <option value="">すべて</option>
                     <option value="false">未完了</option>
                     <option value="true">完了</option>
@@ -130,13 +147,19 @@ export default function SearchPage() {
                 <ColumnLabel>期限</ColumnLabel>
               </Column>
               <TwoColumn>
-                <DatePicker
-                  dateFormat="yyyy/MM/dd"
-                  locale="ja"
-                  selected={selectedDate}
-                  onChange={(date: Date) => setSelectedDate(date)}
-                  className="input form is-small"
-                  placeholderText="YYYY/MM/DD"
+                <Controller
+                  control={control}
+                  name="dueDateFrom"
+                  render={({ field: { onChange, value } }) => (
+                    <DatePicker
+                      onChange={onChange}
+                      selected={value}
+                      dateFormat="yyyy/MM/dd"
+                      locale="ja"
+                      className="input form is-small"
+                      placeholderText="YYYY/MM/DD"
+                    />
+                  )}
                 />
                 <span className="mx-2">-</span>
                 <DatePicker
@@ -207,7 +230,7 @@ export default function SearchPage() {
                       </td>
                       <td align="center" style={{ width: "110px" }}>
                         <label className="checkbox">
-                          <input type="checkbox" defaultChecked={todo.isDone} />
+                          <input type="checkbox" checked={todo.isDone} />
                         </label>
                       </td>
                       <td style={{ width: "20%" }}>{todo.title}</td>
@@ -229,10 +252,10 @@ export default function SearchPage() {
                         </p>
                       </td>
                       <td style={{ width: "110px" }}>
-                        {convertDate(todo.dueDate)}
+                        {convertDateToString(todo.dueDate)}
                       </td>
                       <td style={{ width: "110px" }}>
-                        {convertDate(todo.createdAt)}
+                        {convertDateToString(todo.createdAt)}
                       </td>
                       <td style={{ width: "60px" }}>
                         <button
