@@ -1,8 +1,6 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import DatePicker, { registerLocale } from "react-datepicker";
-import ja from "date-fns/locale/ja";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
@@ -25,7 +23,8 @@ import { useTodoStore } from "@/states/todoStore";
 import { useLoading } from "@/states/loadingStore";
 import { useMessage } from "@/states/messageStore";
 import { SearchConditions } from "@/types/searchCondition";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { Calender } from "@/components/calender";
 
 export default function SearchPage() {
   const rows: TodoItem[] = [];
@@ -46,8 +45,6 @@ export default function SearchPage() {
     mode: "onChange",
   });
 
-  registerLocale("ja", ja);
-  const [selectedDate, setSelectedDate] = useState<Date>();
   const [todoList, setTodoList] = useState<TodoItem[] | undefined>(undefined);
   //const [todoList, setTodoList] = useState<TodoItem[] | undefined>(rows);
   const { setTodo, resetTodo } = useTodoStore();
@@ -61,9 +58,9 @@ export default function SearchPage() {
       description: getValues("description"),
       isDone: getValues("isDone"),
       dueDateFrom: getValues("dueDateFrom"),
-      dueDateTo: undefined,
-      createdAtFrom: undefined,
-      createdAtTo: undefined,
+      dueDateTo: getValues("dueDateTo"),
+      createdAtFrom: getValues("createdAtFrom"),
+      createdAtTo: getValues("createdAtTo"),
     };
     const todoList = await fetchTodo(searchCondition);
     console.log(todoList);
@@ -147,51 +144,17 @@ export default function SearchPage() {
                 <ColumnLabel>期限</ColumnLabel>
               </Column>
               <TwoColumn>
-                <Controller
-                  control={control}
-                  name="dueDateFrom"
-                  render={({ field: { onChange, value } }) => (
-                    <DatePicker
-                      onChange={onChange}
-                      selected={value}
-                      dateFormat="yyyy/MM/dd"
-                      locale="ja"
-                      className="input form is-small"
-                      placeholderText="YYYY/MM/DD"
-                    />
-                  )}
-                />
+                <Calender name="dueDateFrom" control={control} />
                 <span className="mx-2">-</span>
-                <DatePicker
-                  dateFormat="yyyy/MM/dd"
-                  locale="ja"
-                  selected={selectedDate}
-                  onChange={(date: Date) => setSelectedDate(date)}
-                  className="input form is-small"
-                  placeholderText="YYYY/MM/DD"
-                />
+                <Calender name="dueDateTo" control={control} />
               </TwoColumn>
               <Column>
                 <ColumnLabel>登録日</ColumnLabel>
               </Column>
               <TwoColumn>
-                <DatePicker
-                  dateFormat="yyyy/MM/dd"
-                  locale="ja"
-                  selected={selectedDate}
-                  onChange={(date: Date) => setSelectedDate(date)}
-                  className="input form is-small"
-                  placeholderText="YYYY/MM/DD"
-                />
+                <Calender name="createdAtFrom" control={control} />
                 <span className="mx-2">-</span>
-                <DatePicker
-                  dateFormat="yyyy/MM/dd"
-                  locale="ja"
-                  selected={selectedDate}
-                  onChange={(date: Date) => setSelectedDate(date)}
-                  className="input form is-small"
-                  placeholderText="YYYY/MM/DD"
-                />
+                <Calender name="createdAtTo" control={control} />
               </TwoColumn>
             </Columns>
           </div>
@@ -230,7 +193,11 @@ export default function SearchPage() {
                       </td>
                       <td align="center" style={{ width: "110px" }}>
                         <label className="checkbox">
-                          <input type="checkbox" checked={todo.isDone} />
+                          <input
+                            type="checkbox"
+                            checked={todo.isDone}
+                            readOnly
+                          />
                         </label>
                       </td>
                       <td style={{ width: "20%" }}>{todo.title}</td>
