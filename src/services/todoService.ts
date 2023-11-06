@@ -36,6 +36,11 @@ export const postTodo = async (todo: TodoItem): Promise<TodoItem[]> => {
   return response.data as TodoItem[];
 };
 
+export const patchTodo = async (todo: TodoItem): Promise<TodoItem[]> => {
+  const response = await client.patch(`/todo`, todo);
+  return response.data as TodoItem[];
+};
+
 export const deleteTodo = async (id: number): Promise<TodoItem[]> => {
   const response = await client.delete(`/todo/${id}`);
   return response.data as TodoItem[];

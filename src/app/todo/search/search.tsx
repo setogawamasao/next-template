@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -86,9 +86,9 @@ export default function SearchPage() {
     }
   };
 
-  // useEffect(() => {
-  //   search();
-  // }, []);
+  useEffect(() => {
+    search();
+  }, []);
 
   return (
     <div className="container">

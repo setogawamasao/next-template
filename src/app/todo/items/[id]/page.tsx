@@ -6,16 +6,19 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import ja from "date-fns/locale/ja";
 
 import { useTodoStore } from "@/states/todoStore";
-import { postTodo } from "@/services/todoService";
+import { postTodo, patchTodo } from "@/services/todoService";
 import { TodoItem } from "@/types/todoItem";
 import { PageTitle } from "@/components/pageTitle";
 import { MainButton, SubButton } from "@/components/button";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 
+type Mode = "update" | "register";
+
 export default function AddForm() {
   registerLocale("ja", ja);
   const router = useRouter();
   const { todo } = useTodoStore();
+  const mode: Mode = todo ? "update" : "register";
   const {
     register,
     handleSubmit,
@@ -24,16 +27,21 @@ export default function AddForm() {
     formState: { errors },
   } = useForm<TodoItem>({ mode: "onChange", defaultValues: todo });
 
-  const registerTodo: SubmitHandler<TodoItem> = async (todo: TodoItem) => {
-    console.log(todo);
-    await postTodo(todo);
+  const submitTodo: SubmitHandler<TodoItem> = async (todo: TodoItem) => {
+    if (mode === "register") {
+      await postTodo(todo);
+    } else {
+      await patchTodo(todo);
+    }
     router.push("/todo/search");
   };
 
   return (
     <div className="container" style={{ maxWidth: "500px", padding: "20px" }}>
       <div>
-        <PageTitle>TODO新規登録</PageTitle>
+        <PageTitle>{`TODO${
+          mode === "register" ? "新規登録" : "更新"
+        }`}</PageTitle>
         <div className="field">
           <label className="label">タイトル</label>
           <div className="control">
@@ -116,7 +124,9 @@ export default function AddForm() {
             </SubButton>
           </div>
           <div className="control">
-            <MainButton onClick={handleSubmit(registerTodo)}>登録</MainButton>
+            <MainButton onClick={handleSubmit(submitTodo)}>
+              {mode === "register" ? "登録" : "更新"}
+            </MainButton>
           </div>
         </div>
       </div>
