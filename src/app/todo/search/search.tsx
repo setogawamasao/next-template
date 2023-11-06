@@ -63,7 +63,6 @@ export default function SearchPage() {
       createdAtTo: getValues("createdAtTo"),
     };
     const todoList = await fetchTodo(searchCondition);
-    console.log(todoList);
     setTodoList(todoList);
   };
 

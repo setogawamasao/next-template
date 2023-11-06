@@ -25,7 +25,6 @@ export const fetchTodo = async (
   if (["&", "?"].includes(lastCharacter)) {
     queryString = queryString.slice(0, -1);
   }
-  console.log(queryString);
 
   const response = await client.get<TodoItem[]>(`/todo/search${queryString}`);
   return response.data;
