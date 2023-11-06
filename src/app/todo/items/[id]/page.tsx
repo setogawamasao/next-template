@@ -22,7 +22,6 @@ export default function AddForm() {
   const {
     register,
     handleSubmit,
-    setValue,
     control,
     formState: { errors },
   } = useForm<TodoItem>({ mode: "onChange", defaultValues: todo });
@@ -104,14 +103,32 @@ export default function AddForm() {
         <div className="field">
           <label className="label">ステータス</label>
           <div className="control">
-            <label className="radio">
-              <input type="radio" onChange={() => setValue("isDone", false)} />
-              未完了
-            </label>
-            <label className="radio">
-              <input type="radio" onChange={() => setValue("isDone", true)} />
-              完了
-            </label>
+            <Controller
+              control={control}
+              name={"isDone"}
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <label className="radio">
+                    未完了
+                    <input
+                      type="radio"
+                      onChange={() => onChange(false)}
+                      checked={value === false || mode === "register"}
+                      disabled={mode === "register"}
+                    />
+                  </label>
+                  <label className="radio">
+                    完了
+                    <input
+                      type="radio"
+                      onChange={() => onChange(true)}
+                      checked={value === true}
+                      disabled={mode === "register"}
+                    />
+                  </label>
+                </>
+              )}
+            />
           </div>
         </div>
         <div
