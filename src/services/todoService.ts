@@ -1,7 +1,7 @@
 import { client } from "./apiClient";
 import { TodoItem } from "@/types/todoItem";
 import { SearchConditions } from "@/types/searchCondition";
-import { convertDateToString } from "@/utils/dateUtil";
+import { convertDateToString, isDateType } from "@/utils/dateUtil";
 
 export const fetchTodo = async (
   searchConditions: SearchConditions,
@@ -12,7 +12,7 @@ export const fetchTodo = async (
     let searchCondition = searchConditions[key as keyof SearchConditions];
 
     if (searchCondition) {
-      if (Object.prototype.toString.call(searchCondition) === "[object Date]") {
+      if (isDateType(searchCondition)) {
         searchCondition = convertDateToString(searchCondition as Date);
       }
 

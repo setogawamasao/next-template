@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
@@ -9,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { deleteTodo, fetchTodo } from "@/services/todoService";
 import { TodoItem } from "@/types/todoItem";
+import { SearchConditions } from "@/types/searchCondition";
 import { convertDateToString } from "@/utils/dateUtil";
 import {
   Panel,
@@ -19,12 +21,10 @@ import {
 import { Column, ColumnLabel, Columns, TwoColumn } from "@/components/column";
 import { TableContainer, TableHeader } from "@/components/table";
 import { PageTitle } from "@/components/pageTitle";
+import { Calender } from "@/components/calender";
 import { useTodoStore } from "@/states/todoStore";
 import { useLoading } from "@/states/loadingStore";
 import { useMessage } from "@/states/messageStore";
-import { SearchConditions } from "@/types/searchCondition";
-import { useForm } from "react-hook-form";
-import { Calender } from "@/components/calender";
 
 export default function SearchPage() {
   const rows: TodoItem[] = [];
@@ -53,16 +53,7 @@ export default function SearchPage() {
   const router = useRouter();
 
   const search = async (): Promise<void> => {
-    const searchCondition: SearchConditions = {
-      title: getValues("title"),
-      description: getValues("description"),
-      isDone: getValues("isDone"),
-      dueDateFrom: getValues("dueDateFrom"),
-      dueDateTo: getValues("dueDateTo"),
-      createdAtFrom: getValues("createdAtFrom"),
-      createdAtTo: getValues("createdAtTo"),
-    };
-    const todoList = await fetchTodo(searchCondition);
+    const todoList = await fetchTodo(getValues());
     setTodoList(todoList);
   };
 
@@ -87,6 +78,7 @@ export default function SearchPage() {
 
   useEffect(() => {
     search();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
