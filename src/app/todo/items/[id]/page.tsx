@@ -11,26 +11,44 @@ import { TodoItem } from "@/types/todoItem";
 import { PageTitle } from "@/components/pageTitle";
 import { MainButton, SubButton } from "@/components/button";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useLoading } from "@/states/loadingStore";
+import { useMessage } from "@/states/messageStore";
 
 type Mode = "update" | "register";
 
 export default function AddForm() {
   registerLocale("ja", ja);
   const router = useRouter();
+  const { showWhile } = useLoading();
+  const { handleError } = useMessage();
   const { todo } = useTodoStore();
   const mode: Mode = todo ? "update" : "register";
   const {
     register,
     handleSubmit,
     control,
+    getValues,
     formState: { errors },
   } = useForm<TodoItem>({ mode: "onChange", defaultValues: todo });
 
-  const submitTodo: SubmitHandler<TodoItem> = async (todo: TodoItem) => {
-    if (mode === "register") {
-      await postTodo(todo);
-    } else {
-      await patchTodo(todo);
+  const post = async () => {
+    await postTodo(getValues());
+  };
+
+  const patch = async () => {
+    await patchTodo(getValues());
+  };
+
+  const submitTodo: SubmitHandler<TodoItem> = async () => {
+    try {
+      if (mode === "register") {
+        await showWhile(post);
+      } else {
+        await showWhile(patch);
+      }
+    } catch (error) {
+      handleError(error as Error);
+      return;
     }
     router.push("/todo/search");
   };
@@ -104,6 +122,7 @@ export default function AddForm() {
           <label className="label">ステータス</label>
           <div className="control">
             <Controller
+              defaultValue={false}
               control={control}
               name={"isDone"}
               render={({ field: { onChange, value } }) => (
