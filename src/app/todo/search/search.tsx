@@ -62,6 +62,17 @@ export default function SearchPage() {
   };
 
   const rejectTodo = async (id: number): Promise<void> => {
+    const reject = async (): Promise<void> => {
+      await deleteTodo(id);
+    };
+    try {
+      await showWhile(reject);
+    } catch (error) {
+      handleError(error as Error);
+      return;
+    }
+    await search();
+
     await deleteTodo(id);
     await search();
   };
