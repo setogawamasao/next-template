@@ -24,7 +24,9 @@ export const useMessage = create<messageStore>((set) => ({
     } else if (status === 403) {
       set({ message: "サインアウトして、再度サインインを行ってください。" });
     } else {
-      set({ message: "エラーが発生しました。" });
+      set({
+        message: `予期せぬエラーが発生しました。\nお問い合わせ窓口までご連絡下さい。`,
+      });
     }
     set({ isOpen: true });
   },

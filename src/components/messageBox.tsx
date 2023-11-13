@@ -12,7 +12,9 @@ export default function MessageBox() {
             <p>INFORMATION</p>
             <button className="delete" aria-label="delete" onClick={close} />
           </div>
-          <div className="message-body">{message}</div>
+          <div className="message-body" style={{ whiteSpace: "pre-wrap" }}>
+            {message}
+          </div>
         </article>
       </div>
     </div>
