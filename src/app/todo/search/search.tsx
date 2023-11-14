@@ -88,7 +88,7 @@ export default function SearchPage() {
   };
 
   useEffect(() => {
-    search();
+    handleSearch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
