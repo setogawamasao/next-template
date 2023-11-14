@@ -20,12 +20,22 @@ export const useMessage = create<messageStore>((set) => ({
   handleError: (error: Error) => {
     const { status, axiosError } = parseApiError(error);
     if (axiosError?.code === "ECONNABORTED") {
-      set({ message: "接続に問題が発生しました。" });
+      set({
+        message: "タイムアウトが発生しました。\n通信環境を確認してください。",
+      });
+    } else if (axiosError?.code === "ERR_NETWORK") {
+      set({
+        message:
+          "ネットワークエラーが発生しました。\n通信環境を確認してください。",
+      });
     } else if (status === 403) {
-      set({ message: "サインアウトして、再度サインインを行ってください。" });
+      set({
+        message:
+          "権限エラーが発生しました。\nサインアウトして、再度サインインを行ってください。",
+      });
     } else {
       set({
-        message: `予期せぬエラーが発生しました。\nお問い合わせ窓口までご連絡下さい。`,
+        message: `予期せぬエラーが発生しました。\nお問い合わせ窓口までご連絡ください。`,
       });
     }
     set({ isOpen: true });
